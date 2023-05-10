@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+    
+  ubuntu:
+    container_name: ubuntu
+    build: .  #trae la config del archivo dockerfile
+    command: tail -f /dev/null
+    volumes:
+      - ./ubuntu:/home
+
+  mysql:
+    container_name: stock
+    image: mysql:8.0.33
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    #docker exec -it stock mysql -uroot (usuario:root) -proot (password:root)
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql:/var/lib/mysql
+    
